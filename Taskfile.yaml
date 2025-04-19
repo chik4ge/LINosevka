@@ -1,0 +1,39 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  BUILD_DIR: build
+  CACHE_DIR: cache
+
+tasks:
+  all:
+    desc: Run all build tasks
+    deps:
+      - task: iosevka
+      - task: iosevka-nerd
+      - task: line-seed
+      - task: linosevka
+  
+  setup:
+    desc: Setup environment
+    cmds: 
+      - mkdir -p {{.BUILD_DIR}}
+      - mkdir -p {{.CACHE_DIR}}
+
+  iosevka:
+    desc: Build Iosevka
+    dir: ${BUILD_DIR}
+    cmd: echo ${PWD} ${IOSEVKA_VERSION} ${BUILD_CONCURRENCY}
+    vars:
+      IOSEVKA_VERSION: v33.1.0
+      BUILD_CONCURRENCY: 4
+  
+  iosevka-nerd:
+    desc: Merge Iosevka and Nerd fonts
+  
+  line-seed:
+    desc: Generate LINE Seed
+  
+  linosevka:
+    desc: Merge Iosevka and LINE Seed

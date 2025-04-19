@@ -1,0 +1,79 @@
+[buildPlans.LInosevkaBase]
+family = "LInosevka Base"
+spacing = "term"
+serifs = "sans"
+noCvSs = false
+exportGlyphNames = false
+
+[buildPlans.LInosevkaBase.variants]
+inherits = "ss07"
+
+[buildPlans.LInosevkaBase.variants.design]
+two = "straight-neck-serifless"
+five = "upright-arched-serifless"
+six = "straight-bar"
+seven = "straight-serifless"
+eight = "two-circles"
+nine = "straight-bar"
+capital-i = "short-serifed"
+capital-j = "serifless"
+capital-k = "straight-serifless"
+capital-q = "crossing-baseline"
+capital-w = "straight-flat-top-serifless"
+a = "single-storey-serifless"
+b = "toothed-serifless"
+g = "single-storey-serifless"
+i = "serifed-asymmetric"
+j = "serifless"
+k = "straight-serifless"
+l = "serifed"
+q = "earless-corner-straight-serifless"
+r = "hookless-serifless"
+t = "flat-hook-short-neck2"
+y = "straight-serifless"
+tittle = "round"
+punctuation-dot = "round"
+tilde = "low"
+asterisk = "hex-low"
+underscore = "high"
+at = "fourfold"
+dollar = "through"
+percent = "rings-continuous-slash"
+bar = "natural-slope"
+question = "smooth"
+lig-equal-chain = "without-notch"
+lig-hyphen-chain = "without-notch"
+lig-double-arrow-bar = "without-notch"
+lig-single-arrow-bar = "without-notch"
+
+[buildPlans.LInosevkaBase.weights.ExtraLight]
+shape = 200
+menu = 200
+css = 200
+
+[buildPlans.LInosevkaBase.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.LInosevkaBase.weights.ExtraBold]
+shape = 800
+menu = 800
+css = 800
+
+[buildPlans.LInosevkaBase.widths.Normal]
+shape = 600
+menu = 5
+css = "normal"
+
+[buildPlans.LInosevkaBase.slopes.Upright]
+angle = 0
+shape = "upright"
+menu = "upright"
+css = "normal"
+
+[buildPlans.LInosevkaBase.slopes.Oblique]
+angle = 9.4
+shape = "oblique"
+menu = "oblique"
+css = "oblique"

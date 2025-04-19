@@ -1,1 +1,4 @@
 *.sfd
+build/
+cache/
+out/
