@@ -13,8 +13,8 @@
 - git
 - docker
 
-[!caution]
-ビルド用に使用できるメモリが 12GB 程度必要です
+> [!CAUTION]
+> ビルド用に使用できるメモリが 12GB 程度必要です
 
 ```bash
 docker compose up
