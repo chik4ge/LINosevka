@@ -17,5 +17,11 @@
 ビルド用に使用できるメモリが 12GB 程度必要です
 
 ```bash
-sh ./build.sh
+docker compose up
+```
+
+# Debug
+fontforge を起動します
+```bash
+docker compose --profile debug up
 ```

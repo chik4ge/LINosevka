@@ -1,15 +1,18 @@
 services:
-  # fontforge:
-  #   build:
-  #     context: .
-  #     dockerfile: ./src/fontforge/Dockerfile
-  #   environment:
-  #     - DISPLAY=${DISPLAY}
-  #   volumes:
-  #     - /tmp/.X11-unix:/tmp/.X11-unix
-  #     - ./fonts:/fonts
-  #     - ./build:/build
-  #     - ./out/:/out
+  fontforge:
+    build:
+      context: .
+      dockerfile: ./src/fontforge/Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./fonts:/fonts
+      - ./build:/build
+      - ./out/:/out
+    profiles:
+      - debug
+
   iosevka:
     build:
       context: https://github.com/be5invis/Iosevka.git#v33.1.0:docker
@@ -20,16 +23,20 @@ services:
     environment:
       - GIT_TAG=v33.1.0
     command: ttf::Iosevka
+    profiles:
+      - ""
 
   nerd-fonts:
     image: nerdfonts/patcher:latest
-    depends_on:
-      iosevka:
-        condition: service_completed_successfully
+    # depends_on:
+    #   iosevka:
+    #     condition: service_completed_successfully
     volumes:
       - ./build/Iosevka:/in:Z
       - ./build/IosevkaCustomNerdFonts:/out:Z
-    command: -c -s --makegroups 4
+    command: -c --makegroups 4
+    profiles:
+      - ""
   
   line-seed:
     build:
@@ -43,20 +50,24 @@ services:
         - type=gha,mode=max
     volumes:
       - ./build/LINESeedJP:/build/out
+    profiles:
+      - ""
 
-  # builder:
-  #   build:
-  #     context: ./src/builder
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     iosevka:
-  #       condition: service_completed_successfully
-  #     line-seed:
-  #       condition: service_completed_successfully
-  #     nerd-fonts:
-  #       condition: service_completed_successfully
-  #   volumes:
-  #     - ./src/builder:/work
-  #     - ./build/IosevkaCustomNerdFonts:/fonts/iosevka
-  #     - ./build/LINESeedJP/ttf:/fonts/seed
-  #     - ./out:/fonts/out
+  builder:
+    build:
+      context: ./src/builder
+      dockerfile: Dockerfile
+    # depends_on:
+    #   iosevka:
+    #     condition: service_completed_successfully
+    #   line-seed:
+    #     condition: service_completed_successfully
+    #   nerd-fonts:
+    #     condition: service_completed_successfully
+    volumes:
+      - ./src/builder:/work
+      - ./build/IosevkaCustomNerdFonts:/fonts/iosevka
+      - ./build/LINESeedJP:/fonts/seed
+      - ./out:/fonts/out
+    profiles:
+      - ""
