@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./src/fontforge/Dockerfile
+    platform: linux/amd64
     environment:
       - DISPLAY=${DISPLAY}
     volumes:
@@ -17,6 +18,7 @@ services:
     build:
       context: https://github.com/be5invis/Iosevka.git#v33.1.0:docker
       dockerfile: Dockerfile
+    platform: linux/amd64
     volumes:
       - ./build/Iosevka:/work/dist/Iosevka/TTF
       - ./private-build-plans.toml:/work/private-build-plans.toml
@@ -28,9 +30,10 @@ services:
 
   nerd-fonts:
     image: nerdfonts/patcher:latest
-    # depends_on:
-    #   iosevka:
-    #     condition: service_completed_successfully
+    platform: linux/amd64
+    depends_on:
+      iosevka:
+        condition: service_completed_successfully
     volumes:
       - ./build/Iosevka:/in:Z
       - ./build/IosevkaCustomNerdFonts:/out:Z
@@ -48,6 +51,7 @@ services:
         - type=gha
       cache_to:
         - type=gha,mode=max
+    platform: linux/amd64
     volumes:
       - ./build/LINESeedJP:/build/out
     profiles:
@@ -57,13 +61,13 @@ services:
     build:
       context: ./src/builder
       dockerfile: Dockerfile
-    # depends_on:
-    #   iosevka:
-    #     condition: service_completed_successfully
-    #   line-seed:
-    #     condition: service_completed_successfully
-    #   nerd-fonts:
-    #     condition: service_completed_successfully
+    depends_on:
+      iosevka:
+        condition: service_completed_successfully
+      line-seed:
+        condition: service_completed_successfully
+      nerd-fonts:
+        condition: service_completed_successfully
     volumes:
       - ./src/builder:/work
       - ./build/IosevkaCustomNerdFonts:/fonts/iosevka
